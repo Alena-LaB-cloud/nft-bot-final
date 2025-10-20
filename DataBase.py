@@ -85,6 +85,17 @@ def get_wallet_address(user_id: int) -> Optional[str]:
 
         return result[0] if result else None
 
+    except Exception as e:  # ДОБАВЬТЕ ЭТОТ БЛОК
+        logger.error(f"❌ Error getting wallet: {e}")
+        return None
+
+def user_has_wallet(user_id: int) -> bool:
+    """Проверяет, есть ли у пользователя кошелек"""
+    try:
+        return get_wallet_address(user_id) is not None
+    except Exception as e:
+        logger.error(f"❌ Ошибка получения кошелька: {e}")
+        return False
 def user_has_wallet(user_id: int) -> bool:
     """Проверяет, есть ли у пользователя кошелек"""
     try:
